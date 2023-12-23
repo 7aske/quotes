@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home</title>
+    <th:block th:replace="~{fragments/import}"/>
+</head>
+<body>
+<main class="relative flex flex-col justify-center h-screen">
+    <th:block th:replace="~{fragments/navbar}"/>
+    <div class="hero w-full m-auto bg-base-300 rounded-md shadow-md lg:max-w-xl">
+        <div class="hero-content text-center">
+            <div class="max-w-md">
+                <h1 class="text-4xl mb-5">Please sign in</h1>
+                <div th:each="url : ${urls}" class="h-15 flex">
+                    <a th:href="${url.value}"
+                       class="p-4 w-full border-2 border-accent hover:bg-accent rounded-md align-middle">
+                        <span class="icon">
+                            <i th:class="'text-2xl fa-brands fa-' + ${#strings.toLowerCase(url.key)}"></i>
+                        </span>
+<!--                        <span th:text="${url.key}">-->
+<!--                            Provider-->
+<!--                        </span>-->
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

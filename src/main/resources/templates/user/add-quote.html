@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User</title>
+    <th:block th:replace="~{fragments/import}"/>
+</head>
+<body>
+<th:block th:replace="~{fragments/navbar}"/>
+<main class="relative flex flex-col justify-center h-screen overflow-hidden">
+    <div class="w-full p-6 m-auto bg-base-300 rounded-md shadow-md lg:max-w-xl">
+        <h1 class="text-3xl font-semibold text-center">Add Quote</h1>
+        <form th:action="@{/user/quotes/add-quote}" method="post"
+              th:object="${quote}" class="space-y-4">
+            <div>
+                <label class="form-control w-full">
+                    <label class="label">
+                        <span class="text-base label-text">Author</span>
+                    </label>
+                    <input type="text"
+                           placeholder="Author"
+                           th:field="*{author}"
+                           th:classappend="${#fields.hasErrors('author')} ? 'input-error'"
+                           class="input input-bordered w-full"/>
+                    <div class="label"
+                         th:if="${#fields.hasErrors('author')}">
+                        <span class="label-text-alt text-error"
+                              th:errors="*{author}">
+                            The author is invalid
+                        </span>
+                    </div>
+                </label>
+            </div>
+            <div>
+                <label class="form-control w-full">
+                    <label class="label">
+                        <span class="text-base label-text">Author Image</span>
+                    </label>
+                    <input type="text"
+                           class="input input-bordered w-full"
+                           placeholder="Author Image"
+                           th:field="*{authorImage}"
+                           th:classappend="${#fields.hasErrors('authorImage')} ? 'input-error'"/>
+                    <div class="label"
+                         th:if="${#fields.hasErrors('authorImage')}">
+                        <span class="label-text-alt text-error"
+                              th:errors="*{authorImage}">
+                            The author image is invalid
+                        </span>
+                    </div>
+                </label>
+            </div>
+            <div>
+                <label class="form-control w-full">
+                    <label class="label">
+                        <span class="text-base label-text">Text</span>
+                    </label>
+                    <textarea class="textarea input-bordered w-full"
+                              th:field="*{text}"
+                              placeholder="Quote Text"
+                              th:classappend="${#fields.hasErrors('text')} ? 'input-error'">
+                    </textarea>
+                    <div class="label"
+                         th:if="${#fields.hasErrors('text')}">
+                        <span class="label-text-alt text-error"
+                              th:errors="*{text}">
+                            Text is invalid
+                        </span>
+                    </div>
+                </label>
+            </div>
+            <div th:if="${#fields.hasErrors('global')}" class="px-0.5">
+                <p class="text-error"
+                   th:each="err : ${#fields.globalErrors()}"
+                   th:text="${err}">
+                    Error
+                </p>
+            </div>
+            <div class="text-center">
+                <button class="btn bg-primary text-primary-content w-1/4">
+                    Save
+                </button>
+            </div>
+        </form>
+    </div>
+</main>
+</body>
+
+<body>
+
+<div class="is-flex is-flex-direction-column" style="height: 100%">
+    <section class="hero is-info" style="flex:1">
+        <div class="hero-body container">
+            <form th:action="@{/user/quotes/add-quote}" method="post"
+                  th:object="${quote}" class="card">
+                <div class="card-content">
+                    <div class="field">
+                        <label class="label">Author</label>
+                        <div class="control">
+                            <input class="input"
+                                   type="text"
+                                   placeholder="Author"
+                                   th:field="*{author}"
+                                   th:classappend="${#fields.hasErrors('authorImage')} ? 'is-danger'">
+                            <p class="help is-danger"
+                               th:if="${#fields.hasErrors('author')}"
+                               th:errors="*{author}">
+                                The author is invalid
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Author Image</label>
+                        <div class="control">
+                            <input class="input"
+                                   type="text"
+                                   placeholder="Author image"
+                                   th:field="*{authorImage}"
+                                   th:classappend="${#fields.hasErrors('authorImage')} ? 'is-danger'">
+                            <p class="help is-danger"
+                               th:if="${#fields.hasErrors('authorImage')}"
+                               th:errors="*{authorImage}">
+                                The author image is invalid
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Text</label>
+                        <div class="control">
+                            <textarea placeholder="Quote"
+                                      class="textarea"
+                                      th:field="*{text}"
+                                      th:classappend="${#fields.hasErrors('text')} ? 'is-danger'">
+                            </textarea>
+                            <p class="help is-danger"
+                               th:if="${#fields.hasErrors('text')}"
+                               th:errors="*{text}">
+                                The author is invalid
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="control">
+                            <label class="checkbox">
+                                <input type="checkbox" th:field="*{shared}"
+                                       checked>
+                                Shared
+                            </label>
+                        </div>
+                    </div>
+
+                    <div th:if="${#fields.hasErrors('global')}">
+                        <p class="help is-danger"
+                           th:each="err : ${#fields.globalErrors()}"
+                           th:text="${err}">
+                            Error
+                        </p>
+                        <br>
+                    </div>
+
+                    <div class="field is-grouped is-justify-content-end">
+                        <div class="control">
+                            <button class="button is-link has-background-info has-text-light">
+                                Save
+                            </button>
+                        </div>
+                        <!--                    <div class="control">-->
+                        <!--                        <button class="button is-link is-light">Cancel</button>-->
+                        <!--                    </div>-->
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
+</body>
+</html>

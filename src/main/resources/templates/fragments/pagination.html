@@ -1,0 +1,46 @@
+<!--/*@thymesVar id="page" type="org.springframework.data.domain.Page<?>"*/-->
+<nav th:fragment="pagination(url, page)" class=""
+     th:if="${page.totalPages > 1}"
+     th:with="lastPage=${page.totalPages}, currentPage=${page.number + 1}"
+     role="navigation" aria-label="pagination">
+
+    <!--    <a th:disabled="${!(currentPage > 1)}" th:url="${url}" th:href="@{${url}(page=${currentPage} - 2)}"-->
+    <!--       class="pagination-previous">Prev</a>-->
+    <!--    <a th:disabled="${!(currentPage < lastPage)}" th:url="${url}"-->
+    <!--       th:href="@{${url}(page=${currentPage})}" class="pagination-next">Next</a>-->
+
+    <div class="join">
+        <a th:if="${currentPage > 1}" th:href="@{${url}(page=0)}"
+           class="join-item btn"
+           aria-label="Goto page 1">1</a>
+        <a th:if="${currentPage > 3}"
+           class="join-item btn pointer-events-none">
+            &hellip;
+        </a>
+        <a th:href="@{${url}(page=${currentPage} - 2)}"
+           th:if="${currentPage > 2}"
+           class="join-item btn"
+           th:aria-label="'Goto page ' + ${currentPage - 1}"
+           th:text="${currentPage - 1}">
+        </a>
+        <a class="join-item btn btn-active"
+           th:aria-label="'Page ' + ${currentPage}"
+           aria-current="page" th:text="${currentPage}">
+        </a>
+        <a th:if="${currentPage < lastPage - 1}"
+           th:href="@{${url}(page=${currentPage})}"
+           class="join-item btn"
+           th:aria-label="'Goto page ' + ${currentPage + 1}"
+           th:text="${currentPage + 1}">
+        </a>
+        <a th:if="${currentPage < lastPage - 2}"
+           class="join-item btn pointer-events-none">
+            &hellip;
+        </a>
+        <a th:href="@{${url}(page=${lastPage - 1})}"
+           class="join-item btn"
+           th:if="${currentPage < lastPage}"
+           th:aria-label="'Goto page' + ${lastPage}"
+           th:text="${lastPage}"></a>
+    </div>
+</nav>
