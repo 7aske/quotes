@@ -6,6 +6,8 @@ import com._7aske.quotes.service.QuoteService;
 import io.github.wimdeblauwe.htmx.spring.boot.mvc.HxRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -32,12 +34,5 @@ public class HomeController {
     public String random(Model model) {
         model.addAttribute(QUOTE_ATTR, quoteMapper.toDto(quoteService.getRandom()));
         return "fragments/quote-card :: quote_card";
-    }
-
-    @PostMapping
-    @RequestMapping("/save")
-    public String saveQuote(@Valid @ModelAttribute Quote quote) {
-        quoteService.save(quote);
-        return "redirect:/";
     }
 }

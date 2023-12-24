@@ -6,6 +6,7 @@ import jakarta.validation.Constraint;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.springframework.validation.annotation.Validated;
 
@@ -25,10 +26,12 @@ public class Quote extends Auditable {
     private String id;
 
     @NotBlank(message = "Quote text cannot be empty")
+    @Size(min = 3, max = 2048, message = "Quote text must be between 3 and 2048 characters")
     @Column(name = "text")
     private String text;
 
     @NotBlank(message = "Author cannot be empty")
+    @Size(min = 3, max = 255, message = "Author must be between 3 and 255 characters")
     @Column(name = "author")
     private String author;
 
@@ -38,4 +41,8 @@ public class Quote extends Auditable {
     @NotNull
     @Column(name = "shared")
     private Boolean shared = true;
+
+    @Column(name = "added_by")
+    @Size(min = 3, max = 255, message = "Added by must be between 3 and 255 characters")
+    private String addedBy;
 }

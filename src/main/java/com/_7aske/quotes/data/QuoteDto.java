@@ -11,6 +11,6 @@ public class QuoteDto {
     private String author;
     private String authorImage;
     private boolean favourite = false;
-    private String createdBy;
+    private String addedBy;
     private LocalDateTime createdDate;
 }

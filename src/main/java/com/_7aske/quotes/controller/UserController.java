@@ -16,11 +16,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticatedPrincipal;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/user")
@@ -85,13 +89,17 @@ public class UserController {
 
     @PostMapping("/quotes/add-quote")
     public String saveQuote(@ModelAttribute @Valid Quote quote,
+                            @AuthenticationPrincipal OAuth2User user,
                             BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "user/add-quote";
         }
 
+        quote.setAddedBy(user.getAttribute("name"));
+
         userQuoteService.save(quote);
-        return "redirect:/user/quotes/add-quote";
+
+        return "redirect:/user/quotes/list-quotes";
     }
 
 
