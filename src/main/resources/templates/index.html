@@ -1,8 +1,17 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" data-theme="light">
 <head>
-    <title>Home</title>
+    <title>Quotes</title>
     <th:block th:replace="~{fragments/import}"/>
+    <meta name="description" th:content="${#strings.abbreviate(quote.getText(), 255)}"/>
+    <meta name="author" th:content="${quote.getAuthor()}"/>
+    <meta name="title" >
+    <meta property="og:title" content="Quote App"/>
+    <meta property="og:description" th:content="${#strings.abbreviate(quote.getText(), 255)}"/>
+    <meta property="og:image" th:content="${quote.getAuthor() ?: 'https://ui-avatars.com/api/?name=' + quote.getAuthor()}"/>
+    <meta property="og:url" content="https://quote.7aske.com/"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:site_name" content="Quote App"/>
 </head>
 <body>
 <main class="relative flex flex-col justify-center h-screen">

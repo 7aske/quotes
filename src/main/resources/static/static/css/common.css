@@ -1,0 +1,30 @@
+html, body {
+    height: 100%;
+    overflow-y: auto;
+}
+
+[disabled="disabled"] {
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+.card-container {
+    position: relative;
+    height: 100%;
+}
+
+.card-container .quote-card {
+    margin: 0;
+    position: relative;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.card-container .random-button {
+    position: relative;
+    top: 40%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}

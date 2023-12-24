@@ -27,7 +27,7 @@
         <img class="rounded-full w-24 h-24 mx-auto invisible"
              loading="lazy"
              onload="this.previousElementSibling.classList.add('invisible'); this.classList.remove('invisible');"
-             onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=[[${quote.getAuthor()}]]'"
+             th:onerror="'this.onerror=null;this.src=\'https://ui-avatars.com/api/?name=[[${quote.getAuthor()}]]\''"
              th:src="${quote.getAuthorImage() ?: 'https://ui-avatars.com/api/?name=' + quote.getAuthor()}"
              alt="Author image">
     </figure>
