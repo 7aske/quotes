@@ -4,6 +4,7 @@ import com._7aske.quotes.htmx.security.HtmxAccessDeniedHandler;
 import com._7aske.quotes.htmx.security.HtmxAuthenticationEntryPoint;
 import io.github.wimdeblauwe.htmx.spring.boot.mvc.HtmxRequestHeader;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -18,6 +19,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @RequiredArgsConstructor
+@ConditionalOnBean(ClientRegistrationRepository.class)
 public class SecurityConfig {
     private final ClientRegistrationRepository clientRegistrationRepository;
 

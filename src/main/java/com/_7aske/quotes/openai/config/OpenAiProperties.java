@@ -11,7 +11,6 @@ import org.springframework.validation.annotation.Validated;
 @AllArgsConstructor
 @ConfigurationProperties(prefix = "openai")
 public class OpenAiProperties {
-    @NotBlank
     private String apiKey;
 
     @NotBlank

@@ -1,6 +1,8 @@
 package com._7aske.quotes.security;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.actuate.autoconfigure.endpoint.condition.ConditionalOnAvailableEndpoint;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.core.ResolvableType;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
@@ -16,6 +18,7 @@ import java.util.Map;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/login")
+@ConditionalOnBean(ClientRegistrationRepository.class)
 public class LoginController {
     private final ClientRegistrationRepository clientRegistrationRepository;
     private final Map<String, String> oauth2AuthenticationUrls = new HashMap<>();
