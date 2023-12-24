@@ -152,7 +152,7 @@
                 <!-- configuration for building the package -->
                 <executions>
                     <execution>
-                        <phase>compile</phase>
+                        <phase>generate-resources</phase>
                         <goals>
                             <goal>exec</goal>
                         </goals>
