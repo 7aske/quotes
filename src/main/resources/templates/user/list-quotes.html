@@ -30,7 +30,7 @@
         <div th:fragment="quotes-container" id="quotes-container">
             <div th:each="quote : ${quotes}"
                  th:with="favouriteUrl=@{/user/quotes/remove-favourite(quoteId=${quote.getId()})}, quoteUrl=@{/user/quotes/remove-quote(quoteId=${quote.getId()})}">
-                <div class="flex flex-row justify-center">
+                <div class="flex flex-row justify-center max-w-md m-auto p-2">
                     <div th:replace="~{fragments/quote-card :: quote_card(${quote})}"></div>
                 </div>
                 <div>
