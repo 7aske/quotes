@@ -36,25 +36,13 @@ public class UserController {
 
     private static final int PAGE_SIZE = 5;
 
-    @GetMapping("/quotes/is-favourite")
-    public @ResponseBody ResponseEntity<Void> isFavourite(@AuthenticationPrincipal AuthenticatedPrincipal principal,
-                                                          @RequestParam String quoteId) {
-        if (userQuoteService.isFavourite(quoteId, principal.getName())) {
-            return ResponseEntity.status(HttpStatus.ALREADY_REPORTED).build();
-        }
-
-        return ResponseEntity.noContent().build();
-    }
-
     @HxRequest
     @PostMapping(value = "/quotes/add-favourite", consumes = "application/x-www-form-urlencoded")
     public String addFavourite(@AuthenticationPrincipal AuthenticatedPrincipal principal,
                                @RequestParam String quoteId,
-                               Model model,
-                               HttpServletResponse response) {
+                               Model model) {
         userQuoteService.addFavourite(quoteId, principal.getName());
         model.addAttribute("quote", quoteMapper.toDto(quoteService.findById(quoteId)));
-        response.setHeader(HtmxResponseHeader.HX_PUSH_URL.getValue(), "/?quoteId=" + quoteId);
         return "fragments/quote-card :: quote_card";
     }
 

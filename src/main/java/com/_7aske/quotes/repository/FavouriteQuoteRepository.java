@@ -10,4 +10,6 @@ import org.springframework.data.jpa.repository.Query;
 public interface FavouriteQuoteRepository extends JpaRepository<FavouriteQuote, FavouriteQuote.FavouriteQuoteId> {
     @Query(value = "select q from Quote q where q.id in (select fq.id.quoteId from FavouriteQuote fq where fq.id.user = ?1)")
     Page<Quote> findAllByUser(String user, Pageable page);
+
+    long countAllById_QuoteId(String quoteId);
 }

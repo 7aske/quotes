@@ -12,6 +12,8 @@ public interface UserQuoteService {
 
     void removeFavourite(String quoteId, String user);
 
+    long favouriteCount(String quoteId);
+
     Page<Quote> listQuotes(AuthenticatedPrincipal principal, Pageable page);
 
     Page<Quote> listFavourites(AuthenticatedPrincipal principal, Pageable page);

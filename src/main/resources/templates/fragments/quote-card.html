@@ -1,7 +1,7 @@
 <!--/*@thymesVar id="quote" type="com._7aske.quotes.data.QuoteDto"*/-->
-<div th:fragment="quote_card(quote)" class="quote-card card p-2 bg-primary text-primary-content border-4 border-accent" id="quote-card">
+<div th:fragment="quote_card(quote)" class="quote-card card p-2 bg-primary w-full text-primary-content border-4 border-accent">
     <div class="flex flex-row-reverse content-between p-4 bg-accent shadow rounded-box">
-        <button class="tooltip w-7"
+        <button class="btn tooltip bg-transparent border-0 shadow-none text-primary-content hover:text-primary hover:bg-transparent"
                 type="button"
                 data-tip="Copy"
                 th:data-url="@{/(quoteId=${quote.getId()})}"
@@ -12,14 +12,15 @@
         </button>
         <button th:hx-post="@{/user/quotes/add-favourite(quoteId=${quote.getId()})}"
                 hx-swap="outerHTML"
-                hx-target="#quote-card"
+                hx-target="closest .quote-card"
                 hx-trigger="click"
                 data-tip="Favourite"
-                class="tooltip w-7">
+                class="btn tooltip bg-transparent border-0 shadow-none text-primary-content hover:text-primary hover:bg-transparent">
                               <span class="icon">
                                 <i th:classappend="${quote.isFavourite()} ? 'fa-solid fa-heart' : 'fa-regular fa-heart'"
                                    th:data-quoteid="${quote.getId()}"></i>
                               </span>
+                <div class="badge" th:text="${quote.getFavouriteCount() > 999 ? '999+' : quote.getFavouriteCount()}"></div>
         </button>
     </div>
     <figure class="relative pt-3">

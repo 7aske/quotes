@@ -11,13 +11,11 @@
         <!--                   class="input input-bordered w-24 md:w-auto"/>-->
         <!--        </div>-->
         <ul class="menu menu-horizontal px-1">
-            <li class="pt-1">
-                <button data-toggle-theme="dark,light" class="fa-solid fa-sun" data-act-class="fa-moon">
+            <li>
+                <button data-toggle-theme="dark,light" class="h-full pt-3 fa-solid fa-sun" data-act-class="fa-moon">
                 </button>
             </li>
-        </ul>
-        <ul sec:authorize="${isAnonymous()}" class="menu menu-horizontal px-1">
-            <li><a th:href="@{/login}">Sign In</a></li>
+            <li sec:authorize="${isAnonymous()}" ><a th:href="@{/login}">Sign In</a></li>
         </ul>
         <div sec:authorize="isFullyAuthenticated()"
              class="dropdown dropdown-end">

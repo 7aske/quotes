@@ -6,6 +6,9 @@ import com._7aske.quotes.repository.FavouriteQuoteRepository;
 import com._7aske.quotes.service.QuoteService;
 import com._7aske.quotes.service.UserQuoteService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.AuthenticatedPrincipal;
@@ -23,6 +26,7 @@ public class UserQuoteServiceImpl implements UserQuoteService {
     }
 
     @Override
+    @CacheEvict(value = "favouriteCount", key = "#quoteId")
     public void addFavourite(String quoteId, String user) {
         if (isFavourite(quoteId, user)) {
             removeFavourite(quoteId, user);
@@ -32,8 +36,15 @@ public class UserQuoteServiceImpl implements UserQuoteService {
     }
 
     @Override
+    @CachePut(value = "favouriteCount", key = "#quoteId")
     public void removeFavourite(String quoteId, String user) {
         favouriteQuoteRepository.deleteById(new FavouriteQuote.FavouriteQuoteId(quoteId, user));
+    }
+
+    @Override
+    @Cacheable(value = "favouriteCount", key = "#quoteId")
+    public long favouriteCount(String quoteId) {
+        return favouriteQuoteRepository.countAllById_QuoteId(quoteId);
     }
 
     @Override

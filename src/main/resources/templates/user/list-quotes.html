@@ -1,7 +1,12 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>User</title>
+    <title th:if="${favourites}">
+            Favourites
+    </title>
+    <title th:unless="${favourites}">
+            My Quotes
+    </title>
     <th:block th:replace="~{fragments/import}"/>
 </head>
 <body>

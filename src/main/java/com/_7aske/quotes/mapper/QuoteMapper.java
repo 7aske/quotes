@@ -28,6 +28,8 @@ public abstract class QuoteMapper {
             return;
         }
 
+        quoteDto.setFavouriteCount(userQuoteService.favouriteCount(quoteDto.getId()));
+
         quoteDto.setFavourite(userQuoteService.isFavourite(quoteDto.getId(), authentication.getName()));
     }
 }
